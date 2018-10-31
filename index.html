@@ -1,0 +1,114 @@
+<!DOCTYPE html >
+<html lang="en">
+
+<head>
+    <title>WiFi controlled LED</title>
+    <script src="jquery.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #d2dae2;
+            color: #485460;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+            <h2 class="text-center">WiFi Controlled LED</h2>
+            <form name="form" action="" method="GET">
+                <div class="form-group">
+                    <label for="ip">ESP8266 IP Address:</label>
+                    <input type="text" class="form-control" name="ipaddress" id="ip" placeholder="ex. 192.168.1.100">
+                </div>
+                <div class="form-group">
+                    <input type="button" name="led1" value="Turn ON 1" class="btn btn-default" style="font-size: 10pt;">
+                    <input type="button" name="led2" value="Turn ON 2" class="btn btn-default" style="font-size: 10pt;">
+                    <input type="button" name="led3" value="Turn ON 3" class="btn btn-default" style="font-size: 10pt;">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    $.ajaxSetup({
+        timeout: 1000
+    });
+
+    btn1 = document.querySelector('input[name="led1"]');
+    btn2 = document.querySelector('input[name="led2"]');
+    btn3 = document.querySelector('input[name="led3"]');
+
+    btn1.addEventListener('click', led1);
+    btn2.addEventListener('click', led2);
+    btn3.addEventListener('click', led3);
+
+    function led1() {
+        var val1 = 'OFF';
+
+        if (btn1.value === 'Turn OFF 1') {
+            btn1.value = 'Turn ON 1';
+            val1 = 'OFF';
+        } else {
+            btn1.value = 'Turn OFF 1';
+            val1 = 'ON';
+        }
+
+        TextVar = form.ipaddress.value;
+        ArduinoVar = "http://" + TextVar + ":80/";
+
+        $.get(ArduinoVar, {
+            led1: val1
+        }); {
+            Connection: close
+        };
+    }
+
+    function led2() {
+        var val1 = 'OFF';
+
+        if (btn2.value === 'Turn OFF 2') {
+            btn2.value = 'Turn ON 2';
+            val1 = 'OFF';
+        } else {
+            btn2.value = 'Turn OFF 2';
+            val1 = 'ON';
+        }
+
+        TextVar = form.ipaddress.value;
+        ArduinoVar = "http://" + TextVar + ":80/";
+
+        $.get(ArduinoVar, {
+            led2: val1
+        }); {
+            Connection: close
+        };
+    }
+
+    function led3() {
+        var val1 = 'OFF';
+
+        if (btn3.value === 'Turn OFF 3') {
+            btn3.value = 'Turn ON 3';
+            val1 = 'OFF';
+        } else {
+            btn3.value = 'Turn OFF 3';
+            val1 = 'ON';
+        }
+
+        TextVar = form.ipaddress.value;
+        ArduinoVar = "http://" + TextVar + ":80/";
+
+        $.get(ArduinoVar, {
+            led3: val1
+        }); {
+            Connection: close
+        };
+    }
+</script>
+
+</html>
